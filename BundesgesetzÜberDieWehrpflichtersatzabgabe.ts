@@ -1,11 +1,11 @@
 /**
  * @file Bundesgesetz über die Wehrpflichtersatzabgabe
- * @see https://www.fedlex.admin.ch/eli/cc/1959/2035_2097_2125/de
+ * @see https://www.fedlex.admin.ch/eli/cc/1959/2035_2097_2125
  */
 
 /**
  * {@link SchweizerBürger Schweizer Bürger}, die ihre Wehrpflicht nicht oder nur teilweise durch persönliche Dienstleistung (Militär- oder Zivildienst) erfüllen, haben {@link Ersatzflicht einen Ersatz in Geld zu leisten}.
- * @see https://www.fedlex.admin.ch/eli/cc/1959/2035_2097_2125/de#art_1
+ * @see https://www.fedlex.admin.ch/eli/cc/1959/2035_2097_2125#art_1
  * */
 class Ersatzpflichtiger extends SchweizerBürger {
 	constructor(
@@ -26,7 +26,7 @@ class Ersatzpflichtiger extends SchweizerBürger {
 
 /**
  * Die {@link Ersatzpflicht} {@link beginn}t frühestens am Anfang des Jahres, in dem der Wehrpflichtige das {@link Ersatzflicht.ALTERSJAHR_ZU_FRÜHESTEM_BEGINN 19}. {@link SchweizerBürger.altersjahr Altersjahr} vollendet. Sie dauert längstens bis zum Ende des Jahres, in dem er das {@link Ersatzflicht.ALTERSJAHR_ZU_SPÄTESTEM_ENDE 37}. {@link SchweizerBürger.altersjahr Altersjahr} vollendet.
- * @see https://www.fedlex.admin.ch/eli/cc/1959/2035_2097_2125/de#art_3
+ * @see https://www.fedlex.admin.ch/eli/cc/1959/2035_2097_2125#art_3
  * */
 class Ersatzflicht {
 	static readonly DAUER_IN_JAHREN = 11
@@ -91,7 +91,7 @@ class Ersatzflicht {
 
 /**
  * Die Ersatzabgabe wird nach der Gesetzgebung über die direkte Bundessteuer auf dem gesamten Reineinkommen erhoben, das der {@link Ersatzpflichtiger Ersatzpflichtige} im In- und Ausland erzielt.
- * @see https://www.fedlex.admin.ch/eli/cc/1959/2035_2097_2125/de#art_11
+ * @see https://www.fedlex.admin.ch/eli/cc/1959/2035_2097_2125#art_11
  */
 class Reineinkommen {
 	constructor(
@@ -103,7 +103,7 @@ class Reineinkommen {
 		 *
 		 *  Massgebend sind die Verhältnisse des Ersatzpflichtigen in der Veranlagungsperiode der Steuer, nach deren Grundlagen die Ersatzabgabe veranlagt wird. Wird die Ersatzabgabe aufgrund einer besonderen Ersatzabgabeerklärung veranlagt, so sind die Verhältnisse des Ersatzpflichtigen am Ende des Ersatzjahres massgebend.
 		 * 
-		 * @link https://www.fedlex.admin.ch/eli/cc/1959/2035_2097_2125/de#art_12
+		 * @link https://www.fedlex.admin.ch/eli/cc/1959/2035_2097_2125#art_12
 		 */
 		private readonly abzüge: {
 			/** die {@link abzüge.sozialabzüge Sozialabzüge} nach den für das Ersatzjahr geltenden Bestimmungen für die direkte Bundessteuer */
@@ -154,7 +154,7 @@ class Ersatzabgabe {
 	 * 
 	 * Für {@link Ersatzpflichtiger ersatzpflichtige} Behinderte, die nach Artikel 4 Absatz 1 Buchstabe a nicht von der {@link Ersatzpflicht} befreit sind, wird die {@link Ersatzabgabe} um die Hälfte herabgesetzt.
 	 * 
-	 * @link https://www.fedlex.admin.ch/eli/cc/1959/2035_2097_2125/de#art_13
+	 * @link https://www.fedlex.admin.ch/eli/cc/1959/2035_2097_2125#art_13
 	 */
 	readonly betrag: number
 }
