@@ -24,7 +24,7 @@ class Ersatzpflichtiger extends SchweizerBürger {
 }
 
 /**
- * Die {@link Ersatzpflicht Ersatzpflicht} {@link beginn beginn}t frühestens am Anfang des Jahres, in dem der Wehrpflichtige das {@link Ersatzflicht.ALTERSJAHR_ZU_FRÜHESTEM_BEGINN 19}. {@link SchweizerBürger.altersjahr Altersjahr} vollendet. Sie dauert längstens bis zum Ende des Jahres, in dem er das {@link Ersatzflicht.ALTERSJAHR_ZU_SPÄTESTEM_ENDE 37}. {@link SchweizerBürger.altersjahr Altersjahr} vollendet.
+ * Die {@link Ersatzpflicht} {@link beginn}t frühestens am Anfang des Jahres, in dem der Wehrpflichtige das {@link Ersatzflicht.ALTERSJAHR_ZU_FRÜHESTEM_BEGINN 19}. {@link SchweizerBürger.altersjahr Altersjahr} vollendet. Sie dauert längstens bis zum Ende des Jahres, in dem er das {@link Ersatzflicht.ALTERSJAHR_ZU_SPÄTESTEM_ENDE 37}. {@link SchweizerBürger.altersjahr Altersjahr} vollendet.
  * @see https://www.fedlex.admin.ch/eli/cc/1959/2035_2097_2125/de#art_3
  * */
 class Ersatzflicht {
