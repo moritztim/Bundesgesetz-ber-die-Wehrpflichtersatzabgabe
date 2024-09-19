@@ -10,10 +10,11 @@
 class Ersatzpflichtiger extends SchweizerBürger {
 	constructor(
 		geburt: Date,
+		reineinkommen: Reineinkommen,
 		erstazpflichtBeginnJahr?: number,
 		ersatzpflichtEndJahr?: number
 	) {
-		super(geburt)
+		super(geburt, reineinkommen)
 		this.ersatzpflicht = new Ersatzflicht(
 			this,
 			erstazpflichtBeginnJahr ? new Date(erstazpflichtBeginnJahr, 0, 1) : undefined,
@@ -124,4 +125,36 @@ class Reineinkommen {
 	public readonly netto: number
 }
 
+class Ersatzabgabe {
+	static readonly MINDEST_BETRAG = 400
+	constructor(
+		public gegenstand: Reineinkommen,
+		private readonly herabgesetzt = false
+	) {
+		let result = 0;
 
+		// Die Ersatzabgabe beträgt 3 Franken je 100 Franken des taxpflichtigen Einkommens,
+		for (let franken = 0; franken < this.gegenstand.netto; franken += 100) {
+			result += 3
+		}
+
+		// mindestens aber 400 Franken.
+		result = Math.max(Ersatzabgabe.MINDEST_BETRAG, result)
+
+		// Für ersatzpflichtige Behinderte, die nach Artikel 4 Absatz 1 Buchstabe a nicht von der Ersatzpflicht befreit sind,
+		this.betrag = result - (
+			this.herabgesetzt ?
+				// wird die Ersatzabgabe um die Hälfte herabgesetzt.
+				result * 0.5 : 0
+		)
+	}
+
+	/**
+	 * Die {@link Ersatzabgabe} beträgt 3 Franken je 100 Franken des {@link Ersatzabgabe.gegenstand taxpflichtigen Einkommens}, mindestens aber {@link Ersatzabgabe.MINDEST_BETRAG 400} Franken.
+	 * 
+	 * Für {@link Ersatzpflichtiger ersatzpflichtige} Behinderte, die nach Artikel 4 Absatz 1 Buchstabe a nicht von der {@link Ersatzpflicht} befreit sind, wird die {@link Ersatzabgabe} um die Hälfte herabgesetzt.
+	 * 
+	 * @link https://www.fedlex.admin.ch/eli/cc/1959/2035_2097_2125/de#art_13
+	 */
+	readonly betrag: number
+}

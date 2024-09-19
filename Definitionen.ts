@@ -1,6 +1,7 @@
 class SchweizerBürger {
 	constructor(
-		public geburt: Date
+		public geburt: Date,
+		public reineinkommen: Reineinkommen
 	) { }
 
 	altersjahr(alter: number) {
