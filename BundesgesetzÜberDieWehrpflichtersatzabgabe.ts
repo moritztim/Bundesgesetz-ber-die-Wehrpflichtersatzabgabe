@@ -88,3 +88,40 @@ class Ersatzflicht {
 
 }
 
+/**
+ * Die Ersatzabgabe wird nach der Gesetzgebung über die direkte Bundessteuer auf dem gesamten Reineinkommen erhoben, das der {@link Ersatzpflichtiger Ersatzpflichtige} im In- und Ausland erzielt.
+ * @see https://www.fedlex.admin.ch/eli/cc/1959/2035_2097_2125/de#art_11
+ */
+class Reineinkommen {
+	constructor(
+		private readonly brutto: number,
+		/** Vom {@link Reineinkommen} werden abgezogen:
+		 *
+		 *	@property die {@link abzüge.sozialabzüge Sozialabzüge} nach den für das Ersatzjahr geltenden Bestimmungen für die direkte Bundessteuer;
+		 *	@property die {@link abzüge.steuerbareVersicherungsLeistungen steuerbaren Leistungen}, die der {@link Ersatzpflichtiger Ersatzpflichtige} von der Militärversicherung, der Invalidenversicherung, der Schweizerischen Unfallversicherungsanstalt oder von einer andern öffentlichrechtlichen oder privatrechtlichen Unfall -, Kranken - oder Invalidenversicherung erhält; 
+		 *
+		 *  Massgebend sind die Verhältnisse des Ersatzpflichtigen in der Veranlagungsperiode der Steuer, nach deren Grundlagen die Ersatzabgabe veranlagt wird. Wird die Ersatzabgabe aufgrund einer besonderen Ersatzabgabeerklärung veranlagt, so sind die Verhältnisse des Ersatzpflichtigen am Ende des Ersatzjahres massgebend.
+		 * 
+		 * @link https://www.fedlex.admin.ch/eli/cc/1959/2035_2097_2125/de#art_12
+		 */
+		private readonly abzüge: {
+			/** die {@link abzüge.sozialabzüge Sozialabzüge} nach den für das Ersatzjahr geltenden Bestimmungen für die direkte Bundessteuer */
+			sozialabzüge: number,
+			/** die {@link abzüge.steuerbareVersicherungsLeistungen steuerbaren Leistungen}, die der {@link Ersatzpflichtiger Ersatzpflichtige} von der Militärversicherung, der Invalidenversicherung, der Schweizerischen Unfallversicherungsanstalt oder von einer andern öffentlichrechtlichen oder privatrechtlichen Unfall -, Kranken - oder Invalidenversicherung erhält */
+			steuerbareVersicherungsLeistungen: number
+		}
+	) {
+		let wert = this.brutto
+		for (const key in this.abzüge) {
+			if (Object.prototype.hasOwnProperty.call(this.abzüge, key)) {
+				const abzug = this.abzüge[key];
+				wert -= abzug
+			}
+		}
+		this.netto = wert
+	}
+
+	public readonly netto: number
+}
+
+
