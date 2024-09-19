@@ -7,7 +7,7 @@
  * {@link SchweizerBürger Schweizer Bürger}, die ihre Wehrpflicht nicht oder nur teilweise durch persönliche Dienstleistung (Militär- oder Zivildienst) erfüllen, haben {@link Ersatzflicht einen Ersatz in Geld zu leisten}.
  * @see https://www.fedlex.admin.ch/eli/cc/1959/2035_2097_2125/de#art_1
  * */
-class ErsatzPflichtiger extends SchweizerBürger {
+class Ersatzpflichtiger extends SchweizerBürger {
 	constructor(
 		geburt: Date,
 		erstazpflichtBeginnJahr?: number,
@@ -35,11 +35,11 @@ class Ersatzflicht {
 	static readonly ALTERSJAHR_ZU_SPÄTESTEM_ENDE = 37
 
 	/**
-	 * Frühestens der Anfang des Jahres, in dem {@link ErsatzPflichtiger der Pflichtige} das {@link Ersatzflicht.ALTERSJAHR_ZU_FRÜHESTEM_BEGINN 19}. {@link SchweizerBürger.altersjahr Altersjahr} vollendet
+	 * Frühestens der Anfang des Jahres, in dem {@link Ersatzpflichtiger der Pflichtige} das {@link Ersatzflicht.ALTERSJAHR_ZU_FRÜHESTEM_BEGINN 19}. {@link SchweizerBürger.altersjahr Altersjahr} vollendet
 	 * */
 	beginn: Date
 	/**
-	 * Spätestens das Ende des Jahres, in dem {@link ErsatzPflichtiger der Pflichtige} das {@link Ersatzflicht.ALTERSJAHR_ZU_SPÄTESTEM_ENDE 37}. {@link SchweizerBürger.altersjahr Altersjahr} vollendet
+	 * Spätestens das Ende des Jahres, in dem {@link Ersatzpflichtiger der Pflichtige} das {@link Ersatzflicht.ALTERSJAHR_ZU_SPÄTESTEM_ENDE 37}. {@link SchweizerBürger.altersjahr Altersjahr} vollendet
 	 * */
 	ende: Date
 	constructor(
@@ -73,14 +73,14 @@ class Ersatzflicht {
 	}
 
 	/**
-	 * Der Anfang des Jahres, in dem {@link ErsatzPflichtiger der Pflichtige} das {@link Ersatzflicht.ALTERSJAHR_ZU_FRÜHESTEM_BEGINN 19}. {@link SchweizerBürger.altersjahr Altersjahr} vollendet
+	 * Der Anfang des Jahres, in dem {@link Ersatzpflichtiger der Pflichtige} das {@link Ersatzflicht.ALTERSJAHR_ZU_FRÜHESTEM_BEGINN 19}. {@link SchweizerBürger.altersjahr Altersjahr} vollendet
 	 * */
 	static frühesterBeginn(für: SchweizerBürger): Date {
 		return new Date(für.altersjahr(this.ALTERSJAHR_ZU_FRÜHESTEM_BEGINN) + 1, 0, 1);
 	}
 
 	/**
-	 * Das Ende des Jahres, in dem {@link ErsatzPflichtiger der Pflichtige} {@link Ersatzflicht.ALTERSJAHR_ZU_SPÄTESTEM_ENDE 37}. {@link SchweizerBürger.altersjahr Altersjahr} vollendet
+	 * Das Ende des Jahres, in dem {@link Ersatzpflichtiger der Pflichtige} {@link Ersatzflicht.ALTERSJAHR_ZU_SPÄTESTEM_ENDE 37}. {@link SchweizerBürger.altersjahr Altersjahr} vollendet
 	 * */
 	static spätestesEnde(für: SchweizerBürger): Date {
 		return new Date(für.altersjahr(this.ALTERSJAHR_ZU_SPÄTESTEM_ENDE) + 1, 11, 31);
