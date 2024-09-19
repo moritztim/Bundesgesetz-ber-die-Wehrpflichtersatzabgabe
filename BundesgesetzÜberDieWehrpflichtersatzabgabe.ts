@@ -134,7 +134,7 @@ class Ersatzabgabe {
 		let result = 0;
 
 		// Die Ersatzabgabe beträgt 3 Franken je 100 Franken des taxpflichtigen Einkommens,
-		for (let franken = 0; franken < this.gegenstand.netto; franken += 100) {
+		for (let franken = 0; franken <= this.gegenstand.netto; franken += 100) {
 			result += 3
 		}
 
