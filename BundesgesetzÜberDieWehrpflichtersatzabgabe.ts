@@ -26,10 +26,12 @@ class Ersatzpflichtiger extends SchweizerBürger {
 	}
 	ersatzpflicht: Ersatzflicht
 	ersatzabgabe(jahr: number): Ersatzabgabe | undefined {
-		// Von der Ersatzpflicht ist befreit, wer im Ersatzjahr:
 		if (
-			// a. wegen erheblicher körperlicher, geistiger oder psychischer Behinderung ein taxpflichtiges Einkommen erzielt, das nach nochmaligem Abzug von Versicherungsleistungen gemäss Artikel 12 Absatz 1 Buchstabe c sowie von behinderungsbedingten Lebenshaltungskosten sein betreibungsrechtliches Existenzminimum um nicht mehr als 100 Prozent übersteigt;
-			(this.hatBehinderungsbedingteLebensunterhaltskosten && this.reineinkommen.verringertDurchBehinderung && !(this.reineinkommen.netto < (this.existenzminimum + this.existenzminimum / 100 * 100))) ||
+			// Von der Ersatzpflicht ist befreit, wer im Ersatzjahr:
+			(
+				// a. wegen erheblicher körperlicher, geistiger oder psychischer Behinderung ein taxpflichtiges Einkommen erzielt, das nach nochmaligem Abzug von Versicherungsleistungen gemäss Artikel 12 Absatz 1 Buchstabe c sowie von behinderungsbedingten Lebenshaltungskosten sein betreibungsrechtliches Existenzminimum um nicht mehr als 100 Prozent übersteigt;
+				(this.hatBehinderungsbedingteLebensunterhaltskosten && this.reineinkommen.verringertDurchBehinderung && !(this.reineinkommen.netto < (this.existenzminimum + this.existenzminimum / 100 * 100)))
+			) ||
 			// Stirbt der Ersatzpflichtige, so entfällt die Abgabe für das Todesjahr.
 			this.tod?.getFullYear() == jahr
 		) return undefined
