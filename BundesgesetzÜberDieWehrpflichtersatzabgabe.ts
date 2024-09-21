@@ -15,7 +15,7 @@ class Ersatzpflichtiger extends SchweizerBürger {
 		erstazpflichtBeginnJahr?: number,
 		ersatzpflichtEndJahr?: number
 	) {
-		super(geburt, tod, reineinkommen)
+		super(geburt, reineinkommen, tod)
 		this.ersatzpflicht = new Ersatzflicht(
 			this,
 			erstazpflichtBeginnJahr ? new Date(erstazpflichtBeginnJahr, 0, 1) : undefined,
@@ -26,7 +26,7 @@ class Ersatzpflichtiger extends SchweizerBürger {
 	ersatzabgabe(jahr: number): Ersatzabgabe | undefined {
 		if (
 			// Stirbt der Ersatzpflichtige, so entfällt die Abgabe für das Todesjahr.
-			this.tod.getFullYear() == jahr
+			this.tod?.getFullYear() == jahr
 		) return undefined
 	}
 }
