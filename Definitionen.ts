@@ -12,3 +12,28 @@ class SchweizerBürger {
 		return this.geburt.getFullYear() + alter - 1;
 	}
 }
+
+enum RelevanterGrund {
+	erheblicheBehinderung,
+	gesundheitDurchMilitärdienstGeschädigt,
+	gesundheitDurchZivildienstGeschädigt
+}
+
+type MilitärdienstDispenz = {
+	relevanterGrund?: RelevanterGrund
+}
+
+class Militärdiensttauglichkeitsentscheid {
+	constructor(
+		tauglich: true
+	)
+	constructor(
+		tauglich: false,
+		grund?: RelevanterGrund
+	)
+	constructor(
+		public tauglich: boolean,
+		public relevanterGrund?: RelevanterGrund
+	) {
+	}
+}

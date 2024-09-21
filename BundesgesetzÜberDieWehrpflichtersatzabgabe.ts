@@ -12,6 +12,8 @@ class Ersatzpflichtiger extends SchweizerBürger {
 		geburt: Date,
 		reineinkommen: Reineinkommen,
 		existenzminimum: number,
+		public militärdiensttauglichkeitsentscheid: Militärdiensttauglichkeitsentscheid,
+		public militärdienstDispenz?: MilitärdienstDispenz
 		hatBehinderungsbedingteLebensunterhaltskosten?: boolean,
 		tod?: Date,
 		erstazpflichtBeginnJahr?: number,
@@ -31,6 +33,10 @@ class Ersatzpflichtiger extends SchweizerBürger {
 			(
 				// a. wegen erheblicher körperlicher, geistiger oder psychischer Behinderung ein taxpflichtiges Einkommen erzielt, das nach nochmaligem Abzug von Versicherungsleistungen gemäss Artikel 12 Absatz 1 Buchstabe c sowie von behinderungsbedingten Lebenshaltungskosten sein betreibungsrechtliches Existenzminimum um nicht mehr als 100 Prozent übersteigt;
 				(this.hatBehinderungsbedingteLebensunterhaltskosten && this.reineinkommen.verringertDurchBehinderung && !(this.reineinkommen.netto < (this.existenzminimum + this.existenzminimum / 100 * 100))) ||
+				// b. dienstuntauglich erklärt oder vom Dienst dispensiert worden ist, weil seine Gesundheit durch den Militär- oder Zivildienst geschädigt wurde;
+				(
+					[this.militärdiensttauglichkeitsentscheid, this.militärdienstDispenz].some((element) => element?.relevanterGrund !== undefined && element.relevanterGrund in [RelevanterGrund.gesundheitDurchMilitärdienstGeschädigt, RelevanterGrund.gesundheitDurchZivildienstGeschädigt])
+				) ||
 				// e. das Schweizer Bürgerrecht erworben oder verloren hat.
 				this.bürgerechtsHistorie.some((bürgerrecht) => jahr in [bürgerrecht.erwerb, bürgerrecht.verlust].map((date) => date?.getFullYear()))
 			) ||
