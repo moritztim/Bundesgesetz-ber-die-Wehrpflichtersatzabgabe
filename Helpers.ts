@@ -1,7 +1,7 @@
 function aggregateDates(operation: (aggregate: number, date: number) => number, ...dates: Date[]) {
 	let aggregate = dates.pop()?.getTime();
 	if (aggregate === undefined) throw new Error('No dates provided.')
-	dates.forEach((date) => { operation(aggregate, date.getTime()) })
+	dates.forEach((date) => { aggregate = operation(aggregate, date.getTime()) })
 	return new Date(aggregate);
 }
 
