@@ -1,6 +1,7 @@
 class SchweizerBürger {
 	constructor(
 		public geburt: Date,
+		public tod: Date,
 		public reineinkommen: Reineinkommen
 	) { }
 
