@@ -11,11 +11,13 @@ class Ersatzpflichtiger extends SchweizerBürger {
 	constructor(
 		geburt: Date,
 		reineinkommen: Reineinkommen,
+		existenzminimum: number,
+		hatBehinderungsbedingteLebensunterhaltskosten?: boolean,
 		tod?: Date,
 		erstazpflichtBeginnJahr?: number,
 		ersatzpflichtEndJahr?: number
 	) {
-		super(geburt, reineinkommen, tod)
+		super(geburt, reineinkommen, existenzminimum, hatBehinderungsbedingteLebensunterhaltskosten, tod)
 		this.ersatzpflicht = new Ersatzflicht(
 			this,
 			erstazpflichtBeginnJahr ? new Date(erstazpflichtBeginnJahr, 0, 1) : undefined,
@@ -24,7 +26,10 @@ class Ersatzpflichtiger extends SchweizerBürger {
 	}
 	ersatzpflicht: Ersatzflicht
 	ersatzabgabe(jahr: number): Ersatzabgabe | undefined {
+		// Von der Ersatzpflicht ist befreit, wer im Ersatzjahr:
 		if (
+			// a. wegen erheblicher körperlicher, geistiger oder psychischer Behinderung ein taxpflichtiges Einkommen erzielt, das nach nochmaligem Abzug von Versicherungsleistungen gemäss Artikel 12 Absatz 1 Buchstabe c sowie von behinderungsbedingten Lebenshaltungskosten sein betreibungsrechtliches Existenzminimum um nicht mehr als 100 Prozent übersteigt;
+			(this.hatBehinderungsbedingteLebensunterhaltskosten && this.reineinkommen.verringertDurchBehinderung && !(this.reineinkommen.netto < (this.existenzminimum + this.existenzminimum / 100 * 100))) ||
 			// Stirbt der Ersatzpflichtige, so entfällt die Abgabe für das Todesjahr.
 			this.tod?.getFullYear() == jahr
 		) return undefined
@@ -117,7 +122,9 @@ class Reineinkommen {
 			sozialabzüge: number,
 			/** die {@link abzüge.steuerbareVersicherungsLeistungen steuerbaren Leistungen}, die der {@link Ersatzpflichtiger Ersatzpflichtige} von der Militärversicherung, der Invalidenversicherung, der Schweizerischen Unfallversicherungsanstalt oder von einer andern öffentlichrechtlichen oder privatrechtlichen Unfall -, Kranken - oder Invalidenversicherung erhält */
 			steuerbareVersicherungsLeistungen: number
-		}
+		},
+		/** Einkommen ist wegen erheblicher körperlicher, geistiger oder psychischer Behinderung verringert */
+		public verringertDurchBehinderung = false
 	) {
 		let wert = this.brutto
 		for (const key in this.abzüge) {
