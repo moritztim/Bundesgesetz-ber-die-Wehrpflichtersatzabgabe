@@ -4,7 +4,7 @@ class SchweizerBürger {
 		public reineinkommen: Reineinkommen,
 		public existenzminimum: number,
 		public hatBehinderungsbedingteLebensunterhaltskosten = false,
-		public bürgerrechtsHistorie: { erwerb: Date, verlust?: Date }[],
+		public bürgerechtsHistorie: { erwerb: Date, verlust?: Date }[],
 		public tod?: Date
 	) { }
 

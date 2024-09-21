@@ -32,7 +32,7 @@ class Ersatzpflichtiger extends SchweizerBürger {
 				// a. wegen erheblicher körperlicher, geistiger oder psychischer Behinderung ein taxpflichtiges Einkommen erzielt, das nach nochmaligem Abzug von Versicherungsleistungen gemäss Artikel 12 Absatz 1 Buchstabe c sowie von behinderungsbedingten Lebenshaltungskosten sein betreibungsrechtliches Existenzminimum um nicht mehr als 100 Prozent übersteigt;
 				(this.hatBehinderungsbedingteLebensunterhaltskosten && this.reineinkommen.verringertDurchBehinderung && !(this.reineinkommen.netto < (this.existenzminimum + this.existenzminimum / 100 * 100))) ||
 				// e. das Schweizer Bürgerrecht erworben oder verloren hat.
-				this.bürgerRechtsHistorie.some((bürgerRecht) => jahr in [bürgerRecht.erwerb, bürgerRecht.verlust].map((date) => date?.getFullYear()))
+				this.bürgerechtsHistorie.some((bürgerrecht) => jahr in [bürgerrecht.erwerb, bürgerrecht.verlust].map((date) => date?.getFullYear()))
 			) ||
 			// Stirbt der Ersatzpflichtige, so entfällt die Abgabe für das Todesjahr.
 			this.tod?.getFullYear() == jahr
