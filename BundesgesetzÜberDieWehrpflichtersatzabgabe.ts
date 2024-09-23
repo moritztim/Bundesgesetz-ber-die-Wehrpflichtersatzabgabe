@@ -13,7 +13,7 @@ class Ersatzpflichtiger extends SchweizerBürger {
 		reineinkommen: Reineinkommen,
 		existenzminimum: number,
 		public militärdiensttauglichkeitsentscheid: Militärdiensttauglichkeitsentscheid,
-		public militärdienstDispenz?: MilitärdienstDispenz
+		public militärdienstDispenz?: MilitärdienstDispenz,
 		hatBehinderungsbedingteLebensunterhaltskosten?: boolean,
 		tod?: Date,
 		erstazpflichtBeginnJahr?: number,
