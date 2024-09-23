@@ -5,6 +5,8 @@ class SchweizerBürger {
 		public existenzminimum: number,
 		public hatBehinderungsbedingteLebensunterhaltskosten = false,
 		public bürgerechtsHistorie: { erwerb: Date, verlust?: Date }[],
+		/** Bezieht eine Rente oder eine Hilflosenentschädigung der Eidgenössischen Invalidenversicherung oder der Unfallversicherung */
+		public beziehtIvOderUvGelder = false,
 		public tod?: Date
 	) { }
 

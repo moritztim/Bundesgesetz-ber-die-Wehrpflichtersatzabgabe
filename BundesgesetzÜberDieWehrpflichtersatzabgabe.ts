@@ -14,13 +14,14 @@ class Ersatzpflichtiger extends SchweizerBürger {
 		existenzminimum: number,
 		public militärdiensttauglichkeitsentscheid: Militärdiensttauglichkeitsentscheid,
 		bürgerechtsHistorie: { erwerb: Date, verlust?: Date }[],
+		beziehtIvOderUvGelder = false,
 		public militärdienstDispenz?: MilitärdienstDispenz,
 		hatBehinderungsbedingteLebensunterhaltskosten?: boolean,
 		tod?: Date,
 		erstazpflichtBeginnJahr?: number,
 		ersatzpflichtEndJahr?: number
 	) {
-		super(geburt, reineinkommen, existenzminimum, hatBehinderungsbedingteLebensunterhaltskosten, bürgerechtsHistorie, tod)
+		super(geburt, reineinkommen, existenzminimum, hatBehinderungsbedingteLebensunterhaltskosten, bürgerechtsHistorie, beziehtIvOderUvGelder, tod)
 		this.ersatzpflicht = new Ersatzflicht(
 			this,
 			erstazpflichtBeginnJahr ? new Date(erstazpflichtBeginnJahr, 0, 1) : undefined,
@@ -34,6 +35,8 @@ class Ersatzpflichtiger extends SchweizerBürger {
 			(
 				// a. wegen erheblicher körperlicher, geistiger oder psychischer Behinderung ein taxpflichtiges Einkommen erzielt, das nach nochmaligem Abzug von Versicherungsleistungen gemäss Artikel 12 Absatz 1 Buchstabe c sowie von behinderungsbedingten Lebenshaltungskosten sein betreibungsrechtliches Existenzminimum um nicht mehr als 100 Prozent übersteigt;
 				(this.hatBehinderungsbedingteLebensunterhaltskosten && this.reineinkommen.verringertDurchBehinderung && !(this.reineinkommen.netto < (this.existenzminimum + this.existenzminimum / 100 * 100))) ||
+				// a^bis. wegen einer erheblichen Behinderung als dienstuntauglich gilt sowie eine Rente oder eine Hilflosenentschädigung der Eidgenössischen Invalidenversicherung oder der Unfallversicherung bezieht;
+				(this.militärdiensttauglichkeitsentscheid.relevanterGrund === RelevanterGrund.erheblicheBehinderung && this.beziehtIvOderUvGelder) ||
 				// b. dienstuntauglich erklärt oder vom Dienst dispensiert worden ist, weil seine Gesundheit durch den Militär- oder Zivildienst geschädigt wurde;
 				(
 					[this.militärdiensttauglichkeitsentscheid, this.militärdienstDispenz].some((element) => element?.relevanterGrund !== undefined && element.relevanterGrund in [RelevanterGrund.gesundheitDurchMilitärdienstGeschädigt, RelevanterGrund.gesundheitDurchZivildienstGeschädigt])
