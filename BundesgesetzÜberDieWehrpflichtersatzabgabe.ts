@@ -13,13 +13,14 @@ class Ersatzpflichtiger extends SchweizerBürger {
 		reineinkommen: Reineinkommen,
 		existenzminimum: number,
 		public militärdiensttauglichkeitsentscheid: Militärdiensttauglichkeitsentscheid,
+		bürgerechtsHistorie: { erwerb: Date, verlust?: Date }[],
 		public militärdienstDispenz?: MilitärdienstDispenz,
 		hatBehinderungsbedingteLebensunterhaltskosten?: boolean,
 		tod?: Date,
 		erstazpflichtBeginnJahr?: number,
 		ersatzpflichtEndJahr?: number
 	) {
-		super(geburt, reineinkommen, existenzminimum, hatBehinderungsbedingteLebensunterhaltskosten, tod)
+		super(geburt, reineinkommen, existenzminimum, hatBehinderungsbedingteLebensunterhaltskosten, bürgerechtsHistorie, tod)
 		this.ersatzpflicht = new Ersatzflicht(
 			this,
 			erstazpflichtBeginnJahr ? new Date(erstazpflichtBeginnJahr, 0, 1) : undefined,
